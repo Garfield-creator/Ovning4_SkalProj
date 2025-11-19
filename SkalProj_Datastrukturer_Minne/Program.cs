@@ -170,7 +170,6 @@ class Program
                     bool done = false;
                     while (!done)
                     {
-                        Console.WriteLine("Enter the name of the new object in the queue:");
                         string input = GetInput("Enter the name of the new object in the queue:");
                         if (String.IsNullOrWhiteSpace(input)) Console.WriteLine("Please enter some input!");
                         else
@@ -279,6 +278,7 @@ class Program
             * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
             */
         string input = GetInput("Enter the string you wish to check for proper parentheses.");
+        static void Error() { Console.WriteLine("The string's parenthesis are not closed correctly!"); }
         Stack<char> stack = [];
         var pairs = new Dictionary<char, char>
         {
@@ -297,7 +297,7 @@ class Program
             {
                 if (stack.Count == 0)
                 {
-                    Console.WriteLine("The string's parenthesis are not closed correctly!");
+                    Error();
                     return;
                 }
                 else
@@ -305,7 +305,7 @@ class Program
                     if (stack.Peek() == pairs[c]) stack.Pop();
                     else
                     {
-                        Console.WriteLine("The string's parenthesis are not closed correctly!");
+                        Error();
                         return;
                     }
                 }
@@ -313,7 +313,7 @@ class Program
         }
         if (stack.Count != 0)
         {
-            Console.WriteLine("The string's parenthesis are not closed correctly!");
+            Error();
             return;
         }
         else Console.WriteLine("The string's parenthesis are closed correctly! Hurray!");
