@@ -326,13 +326,15 @@ class Program
         {
             stack.Push(c);
         }
-        Console.WriteLine("The reversed string is:n");
+        Console.WriteLine("The reversed string is:\n");
         //stack.Reverse(); Skulle kunna använda den här, men det känns som fusk.
         int length = stack.Count;
         for (int i = 0; i < length; i++)   
         {
-            Console.Write(stack.Pop());
+            char c = stack.Pop();
+            Console.Write(c);
         }
+        Console.Write("\n");
     }
 }
 
