@@ -20,6 +20,8 @@ class Program
                 + "\n5. Reverse Text"
                 + "\n6. Recursive Even"
                 + "\n7. Recursive Fibonacci"
+                + "\n8. Itirative Even"
+                + "\n9. Itirative Fibonacci"
                 + "\n0. Exit the application");
             char input = ' '; //Creates the character input to be used with the switch-case below.
             try
@@ -49,38 +51,16 @@ class Program
                     ReverseText();
                     break;
                 case '6':
-                    bool evenRun = true;
-                    int evenResult = 0;
-                    while (evenRun)
-                    {
-                        if (int.TryParse(GetInput("What number?"), out int number))
-                        {
-                            evenResult = RecursiveEven(number-1);
-                            evenRun = false;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Enter a valid number!");
-                        }
-                    }
-                    Console.WriteLine($"The final number is {evenResult}");
+                    Console.WriteLine($"The final number is {RecursiveEven(GetNumber("What number?") - 1)}");
                     break;
                 case '7':
-                    bool run = true;
-                    int result = 0;
-                    while (run)
-                    {
-                        if (int.TryParse(GetInput("What position in the fibbonnachi sequence do you want to know?"), out int number))
-                        {
-                            result = RecursiveFibonnaci(number);
-                            run = false;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Enter a valid number!");
-                        }
-                    }
-                    Console.WriteLine($"The fibbonnachi number is {result}");
+                    Console.WriteLine($"The fibbonnachi number is {RecursiveFibonnaci(GetNumber("What position in the fibbonnachi sequence do you want to know?"))}");
+                    break;
+                case '8':
+                    Console.WriteLine($"The final number is {IterativeEven(GetNumber("What number?"))}");
+                    break;
+                case '9':
+                    Console.WriteLine($"The fibbonnachi number is {IterativeFibonnaci(GetNumber("What position in the fibbonnachi sequence do you want to know?"))}");
                     break;
                 /*
                     * Extend the menu to include the recursive 
@@ -97,7 +77,46 @@ class Program
 
     }
 
-      /// <summary>
+    static int IterativeFibonnaci(int n)
+    {
+        int result = 0;
+        int[] fibonnaci = [0, 1];
+
+        for (int i = 0; i < n; i++)
+        {
+            result = fibonnaci[0] + fibonnaci[1];
+            fibonnaci[(i+1) % 2] = result;
+        }
+        return result;
+    }
+
+    static int IterativeEven(int n)
+    {
+        int result = 0;
+
+        for (int i = 0; i < n-1; i++)
+        {
+            result += 2;
+        }
+        return result;
+    }
+
+    private static int GetNumber(string prompt)
+    {
+        while (true)
+        {
+            if (int.TryParse(GetInput(prompt), out int number))
+            {
+                return number;
+            }
+            else
+            {
+                Console.WriteLine("Enter a valid number!");
+            }
+        } 
+    }
+
+    /// <summary>
     /// Examines the datastructure List
     /// </summary>
     static void ExamineList()
@@ -290,7 +309,7 @@ class Program
         }
     }
 
-    private static string GetInput(string prompt)
+    private static string GetInput(String prompt)
     {
         while (true)
         {
