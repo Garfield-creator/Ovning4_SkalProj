@@ -77,28 +77,18 @@ class Program
 
     }
 
-    static int IterativeFibonnaci(int n)
+    private static string GetInput(String prompt)
     {
-        int result = 0;
-        int[] fibonnaci = [0, 1];
-
-        for (int i = 0; i < n; i++)
+        while (true)
         {
-            result = fibonnaci[0] + fibonnaci[1];
-            fibonnaci[(i+1) % 2] = result;
+            Console.WriteLine(prompt);
+            string input = Console.ReadLine() ?? "";
+            if (String.IsNullOrWhiteSpace(input)) Console.WriteLine("Please enter some input!");
+            else
+            {
+                return input;
+            }
         }
-        return result;
-    }
-
-    static int IterativeEven(int n)
-    {
-        int result = 0;
-
-        for (int i = 0; i < n-1; i++)
-        {
-            result += 2;
-        }
-        return result;
     }
 
     private static int GetNumber(string prompt)
@@ -309,20 +299,6 @@ class Program
         }
     }
 
-    private static string GetInput(String prompt)
-    {
-        while (true)
-        {
-            Console.WriteLine(prompt);
-            string input = Console.ReadLine() ?? "";
-            if (String.IsNullOrWhiteSpace(input)) Console.WriteLine("Please enter some input!");
-            else
-            {
-                return input;
-            }
-        }
-    }
-
     static void CheckParanthesis()
     {
         /*
@@ -402,6 +378,30 @@ class Program
             if (n == 0 || n == 1) return 1;
             return (RecursiveFibonnaci(n-1) + RecursiveFibonnaci(n-2));
         }
+    }
+
+    static int IterativeEven(int n)
+    {
+        int result = 0;
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            result += 2;
+        }
+        return result;
+    }
+
+    static int IterativeFibonnaci(int n)
+    {
+        int result = 0;
+        int[] fibonnaci = [0, 1];
+
+        for (int i = 0; i < n; i++)
+        {
+            result = fibonnaci[0] + fibonnaci[1];
+            fibonnaci[(i + 1) % 2] = result;
+        }
+        return result;
     }
 }
 
