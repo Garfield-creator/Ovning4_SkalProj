@@ -18,6 +18,8 @@ class Program
                 + "\n3. Examine a Stack"
                 + "\n4. Check Parenthesis"
                 + "\n5. Reverse Text"
+                + "\n6. Recursive Even"
+                + "\n7. Recursive Fibonacci"
                 + "\n0. Exit the application");
             char input = ' '; //Creates the character input to be used with the switch-case below.
             try
@@ -46,6 +48,40 @@ class Program
                 case '5':
                     ReverseText();
                     break;
+                case '6':
+                    bool evenRun = true;
+                    int evenResult = 0;
+                    while (evenRun)
+                    {
+                        if (int.TryParse(GetInput("What number?"), out int number))
+                        {
+                            evenResult = RecursiveEven(number-1);
+                            evenRun = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a valid number!");
+                        }
+                    }
+                    Console.WriteLine($"The final number is {evenResult}");
+                    break;
+                case '7':
+                    bool run = true;
+                    int result = 0;
+                    while (run)
+                    {
+                        if (int.TryParse(GetInput("What position in the fibbonnachi sequence do you want to know?"), out int number))
+                        {
+                            result = RecursiveFibonnaci(number);
+                            run = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a valid number!");
+                        }
+                    }
+                    Console.WriteLine($"The fibbonnachi number is {result}");
+                    break;
                 /*
                     * Extend the menu to include the recursive 
                     * and iterative exercises.
@@ -61,9 +97,7 @@ class Program
 
     }
 
-       
-
-    /// <summary>
+      /// <summary>
     /// Examines the datastructure List
     /// </summary>
     static void ExamineList()
@@ -335,6 +369,20 @@ class Program
             Console.Write(c);
         }
         Console.Write("\n");
+    }
+
+    static int RecursiveEven(int n)
+    {
+        if (n == 0) return 0;
+        return (RecursiveEven(n - 1) + 2);
+    }
+
+    static int RecursiveFibonnaci(int n)
+    {
+        {
+            if (n == 0 || n == 1) return 1;
+            return (RecursiveFibonnaci(n-1) + RecursiveFibonnaci(n-2));
+        }
     }
 }
 
